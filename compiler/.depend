@@ -144,7 +144,7 @@ js_simpl.cmi : javascript.cmi code.cmi
 js_tailcall.cmi : js_traverse.cmi javascript.cmi code.cmi
 js_token.cmi : parse_info.cmi
 js_traverse.cmi : util.cmi javascript.cmi code.cmi
-linker.cmi : util.cmi javascript.cmi
+linker.cmi : util.cmi primitive.cmi parse_info.cmi javascript.cmi
 option.cmi :
 parse_bytecode.cmi : parse_info.cmi javascript.cmi code.cmi
 parse_info.cmi :

@@ -23,6 +23,11 @@ ifneq "${WITH_GRAPHICS}" ""
 GRAPHICS_CMA=graphics.cma
 endif
 
+ifneq "${WITH_TYXML}" ""
+TYXML_CMA=tyxml.cma
+endif
+
+
 PA_JS= syntax/pa_js.cmo
 ifeq "${BEST}" "opt"
 ifeq "${NATDYNLINK}" "YES"
@@ -34,7 +39,8 @@ all: $(LIBNAME).cma \
 	${PA_JS} ${PA_JS_NDL} \
 	${PA_DERIVING} 	${PA_DERIVING_NDL} \
 	${DERIVING_JSON} \
-	${GRAPHICS_CMA}
+	${GRAPHICS_CMA} \
+	${TYXML_CMA}
 
 $(LIBNAME).cma: $(OBJS)
 	ocamlmklib -o $(LIBNAME) $(OBJS)
@@ -90,6 +96,15 @@ graphics_js.cmi: graphics_js.ml
 	ocamlfind ocamlc -package lwt,graphics graphics_js.mli
 
 graphics.cma: graphics_js.cmo
+	ocamlfind ocamlc -a -o $@ $^
+
+tyxml_js.cmo: tyxml_js.ml tyxml_js.cmi syntax/pa_js.cmo
+	ocamlfind ocamlc -syntax camlp4o -package lwt,lwt.syntax,tyxml.functor,react -ppopt syntax/pa_js.cmo -c tyxml_js.ml
+
+tyxml_js.cmi: tyxml_js.ml
+	ocamlfind ocamlc -package lwt,tyxml.functor,react tyxml_js.mli
+
+tyxml.cma: tyxml_js.cmo
 	ocamlfind ocamlc -a -o $@ $^
 
 

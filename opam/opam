@@ -13,3 +13,4 @@ depends: [
   "lwt" {>= "2.4"}
   "menhir"
 ]
+depopts: [ "tyxml" "react" ]

@@ -5,18 +5,27 @@ include ../Makefile.filelist
 
 MLIS := ${addprefix ../, ${DOC}}
 
+ifneq "${WITH_GRAPHICS}" ""
+PKGS += -package graphics
+endif
+
+ifneq "${WITH_TYXML}" ""
+PKGS += -package tyxml.functor,react
+endif
+
+
 .PHONY: doc docwiki
 doc: api-html/index.html
 api-html/index.html: ${MLIS} api-index
 	mkdir -p api-html
-	ocamlfind ocamldoc -package lwt -package ocamlbuild -intro api-index -html \
+	ocamlfind ocamldoc -package lwt,ocamlbuild ${PKGS} -intro api-index -html \
 	   -d api-html -I ../lib -I ../lib/deriving_json ${MLIS}
 
 
 docwiki: api-wiki/index.wiki
 api-wiki/index.wiki: ${MLIS} api-index
 	mkdir -p api-wiki
-	ocamlfind ocamldoc -package lwt -package ocamlbuild -intro api-index \
+	ocamlfind ocamldoc -package lwt,ocamlbuild,tyxml.functor,react -intro api-index \
 	   -d api-wiki -I ../lib -I ../lib/deriving_json \
 	   -i $(shell ocamlfind query wikidoc) -g odoc_wiki.cma \
 	   ${MLIS}

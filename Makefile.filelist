@@ -17,6 +17,10 @@ ifneq "${WITH_GRAPHICS}" ""
 IMPL += lib/graphics.cma
 endif
 
+ifneq "${WITH_TYXML}" ""
+IMPL += lib/tyxml.cma
+endif
+
 OTHERS := runtime/runtime.js runtime/weak.js \
           runtime/classlist.js \
           runtime/toplevel.js \

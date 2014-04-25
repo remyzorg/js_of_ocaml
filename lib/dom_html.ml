@@ -1112,6 +1112,8 @@ let getElementById id =
     (fun () -> raise Not_found)
     (fun pnode -> pnode)
 
+let _id = getElementById
+
 (****)
 
 class type frameSetElement = object

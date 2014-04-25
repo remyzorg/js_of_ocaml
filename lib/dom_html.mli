@@ -936,6 +936,9 @@ val getElementById : string -> element Js.t
 (** [getElementById id] returns the element with the id [id] in the
     current document. It raises [Not_found] if there are no such element *)
 
+val _id : string -> element Js.t
+(** An alias for getElementById *)
+
 (** {2 Window objects} *)
 
 (** Location information *)

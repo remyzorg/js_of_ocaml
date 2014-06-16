@@ -378,6 +378,7 @@ module Event = struct
   let change = Dom.Event.make "change"
   let input = Dom.Event.make "input"
   let timeupdate = Dom.Event.make "timeupdate"
+  let ended = Dom.Event.make "ended"
   let submit = Dom.Event.make "submit"
   let scroll = Dom.Event.make "scroll"
   let focus = Dom.Event.make "focus"

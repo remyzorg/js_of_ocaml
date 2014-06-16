@@ -175,6 +175,9 @@ val input :
 val timeupdate :
   ?use_capture:bool ->
   #Dom_html.eventTarget Js.t -> Dom_html.event Js.t Lwt.t
+val ended :
+  ?use_capture:bool ->
+  #Dom_html.eventTarget Js.t -> Dom_html.event Js.t Lwt.t
 val change :
   ?use_capture:bool ->
   #Dom_html.eventTarget Js.t -> Dom_html.event Js.t Lwt.t
@@ -308,6 +311,11 @@ val inputs :
   #Dom_html.eventTarget Js.t ->
   (Dom_html.event Js.t -> unit Lwt.t -> unit Lwt.t) -> unit Lwt.t
 val timeupdates :
+  ?cancel_handler:bool ->
+  ?use_capture:bool ->
+  #Dom_html.eventTarget Js.t ->
+  (Dom_html.event Js.t -> unit Lwt.t -> unit Lwt.t) -> unit Lwt.t
+val endeds :
   ?cancel_handler:bool ->
   ?use_capture:bool ->
   #Dom_html.eventTarget Js.t ->

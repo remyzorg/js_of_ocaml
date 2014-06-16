@@ -7,15 +7,23 @@ IMPL := lib/$(LIBNAME).cma   \
         lib/dll$(LIBNAME)$(DLLEXT) \
         lib/lib$(LIBNAME)$(LIBEXT)
 
+INTF += lib/log/*.cmi
+IMPL += lib/log/logger.cma
+
 ifeq "${BEST}" "opt"
 ifeq "${NATDYNLINK}" "YES"
 IMPL += lib/syntax/pa_js.cmx lib/syntax/pa_js.cmxs
 endif
 endif
 
-ifneq "${WITH_GRAPHICS}" ""
+ifeq "${WITH_GRAPHICS}" "YES"
 IMPL += lib/graphics/graphics.cma
 INTF += lib/graphics/*.cmi
+endif
+
+ifeq "${WITH_TYXML}${WITH_REACT}" "YESYES"
+IMPL += lib/tyxml/tyxml.cma
+INTF += lib/tyxml/*.cmi
 endif
 
 OTHERS := runtime/runtime.js runtime/weak.js \
@@ -41,7 +49,7 @@ endif
 
 IMPL += $(addprefix ocamlbuild/_build/,$(OCAMLBUILD_IMPL))
 
-ifneq "${WITH_DERIVING}" ""
+ifeq "${WITH_DERIVING}" "YES"
 
 JSON := lib/deriving_json/deriving_Json.cmi       \
         lib/deriving_json/deriving_Json_lexer.cmi
